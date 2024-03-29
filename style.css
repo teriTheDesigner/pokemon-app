@@ -10,8 +10,7 @@ body {
   margin: 2rem;
   background-color: #121315;
   color: rgb(184, 184, 184);
-  display: grid;
-  grid-template-columns: 20% 1fr;
+  max-width: 1500px;
 }
 
 aside {
@@ -24,9 +23,13 @@ aside {
   flex-direction: column;
   border-radius: 12px;
   justify-content: space-evenly;
+  position: fixed;
+  top: 0;
+  bottom: 0;
 }
 
 .type {
+  cursor: pointer;
   display: flex;
   padding: 0.2rem;
   padding-left: 0.5rem;
@@ -39,21 +42,23 @@ aside {
   margin-block-end: 0.2em;
 }
 
-.main {
-  grid-column: 2;
-  padding-left: 2rem;
+.type:hover {
+  background-color: #2f3037;
+  transition: 0.4s;
 }
 
 section {
   background-color: #191a1d;
   border-radius: 12px;
+  width: 75%;
+  margin-left: auto;
 }
 
 .sorting {
   display: flex;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  padding-left: 3rem;
+  padding-left: 2rem;
   gap: 2rem;
   font-size: 0.85rem;
   margin-bottom: 1rem;
@@ -70,12 +75,19 @@ section {
 .pokemon-card {
   padding: 1rem;
   background-color: #212225;
-  border-radius: 6px;
+
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
+  border: 3px solid #212225;
 }
 
+.pokemon-card:hover {
+  border: 3px solid #2f3037;
+  transition: 0.5s;
+}
 .all-pokemon-cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -96,10 +108,14 @@ section {
   display: flex;
   gap: 0.5rem;
   background-color: #28292e;
+  width: 100%;
+  font-size: smaller;
+  justify-content: space-evenly;
+  border-radius: 6px;
 }
 
 .favoriteEmpty {
-  background-color: #212225;
+  background-color: #28292e;
   border: none;
   color: white;
   cursor: pointer;
@@ -108,5 +124,9 @@ section {
 
 .headline {
   display: flex;
+  justify-content: center;
   gap: 2rem;
+  background-color: #28292e;
+  width: 100%;
+  border-radius: 6px;
 }
