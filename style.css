@@ -8,7 +8,8 @@
 
 body {
   margin: 2rem;
-  background-color: #121315;
+  /* background-color: #121315; */
+  background-color: #0d0d0f;
   color: rgb(184, 184, 184);
   max-width: 1500px;
 }
@@ -24,8 +25,9 @@ aside {
   border-radius: 12px;
   justify-content: space-evenly;
   position: fixed;
-  top: 0;
-  bottom: 0;
+  top: 2rem;
+  bottom: 1rem;
+  max-height: 900px;
 }
 
 .type {
@@ -47,13 +49,6 @@ aside {
   transition: 0.4s;
 }
 
-section {
-  background-color: #191a1d;
-  border-radius: 12px;
-  width: 75%;
-  margin-left: auto;
-}
-
 .sorting {
   display: flex;
   padding-top: 1rem;
@@ -62,6 +57,11 @@ section {
   gap: 2rem;
   font-size: 0.85rem;
   margin-bottom: 1rem;
+
+  background-color: #191a1d;
+  border-radius: 12px;
+  width: 77%;
+  margin-left: auto;
 }
 
 .sorting button {
@@ -70,6 +70,15 @@ section {
   background-color: #212225;
   color: rgb(184, 184, 184);
   border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sorting button:hover {
+  background-color: #2f3037;
+  transition: 0.4s;
 }
 
 .pokemon-card {
@@ -93,6 +102,10 @@ section {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   padding: 1rem;
   gap: 1rem;
+  background-color: #191a1d;
+  border-radius: 12px;
+  width: 77%;
+  margin-left: auto;
 }
 
 .pokemon-image {
@@ -101,7 +114,7 @@ section {
 
 .name {
   color: white;
-  font-size: larger;
+  font-size: large;
 }
 
 .info {
@@ -109,9 +122,27 @@ section {
   gap: 0.5rem;
   background-color: #28292e;
   width: 100%;
-  font-size: smaller;
+  font-size: small;
   justify-content: space-evenly;
+  padding: 0.5rem;
   border-radius: 6px;
+}
+
+.infodiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.info > *:not(:last-child) {
+  border-right: 1px solid rgb(184, 184, 184);
+  padding-right: 1rem;
+}
+
+.infodiv p {
+  margin-block-start: 0.3em;
+  margin-block-end: 0.3em;
 }
 
 .favoriteEmpty {
