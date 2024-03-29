@@ -146,6 +146,27 @@
         </template>
       </section>
     </main>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="content-layout">
+          <img class="modal-image" src="" alt="Pokemon Image" />
+          <div>
+            <h2 class="modal-name">Name</h2>
+            <p>
+              <strong>Weight:</strong> <span class="modal-weight"></span> kg
+            </p>
+            <p><strong>Types:</strong> <span class="modal-types"></span></p>
+            <p><strong>Experience:</strong> <span class="modal-exp"></span></p>
+            <p>
+              <strong>Abilities</strong>
+            </p>
+            <div class="modal-abilities"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
       AOS.init();

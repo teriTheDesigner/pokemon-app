@@ -15,7 +15,6 @@ body {
 }
 
 aside {
-  grid-column: 1;
   background-color: #191a1d;
   width: max-content;
   padding: 0.5rem 1rem 0.5rem 1rem;
@@ -56,12 +55,12 @@ aside {
   padding-left: 2rem;
   gap: 2rem;
   font-size: 0.85rem;
-  margin-bottom: 1rem;
-
   background-color: #191a1d;
   border-radius: 12px;
   width: 77%;
-  margin-left: auto;
+  right: 0;
+  position: fixed;
+  top: 2rem;
 }
 
 .sorting button {
@@ -106,6 +105,7 @@ aside {
   border-radius: 12px;
   width: 77%;
   margin-left: auto;
+  margin-top: 10%;
 }
 
 .pokemon-image {
@@ -160,4 +160,51 @@ aside {
   background-color: #28292e;
   width: 100%;
   border-radius: 6px;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background-color: #191a1d;
+  padding: 20px;
+
+  width: 80%;
+  max-width: 1000px;
+  border-radius: 12px;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.content-layout {
+  display: flex;
+  justify-content: space-around;
+}
+.modal-image {
+  max-width: 400px;
+  max-height: 500px;
 }
