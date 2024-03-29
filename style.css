@@ -1,0 +1,112 @@
+.inter {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+}
+
+body {
+  margin: 2rem;
+  background-color: #121315;
+  color: rgb(184, 184, 184);
+  display: grid;
+  grid-template-columns: 20% 1fr;
+}
+
+aside {
+  grid-column: 1;
+  background-color: #191a1d;
+  width: max-content;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-size: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  justify-content: space-evenly;
+}
+
+.type {
+  display: flex;
+  padding: 0.2rem;
+  padding-left: 0.5rem;
+  border-radius: 6px;
+  gap: 1rem;
+  align-items: center;
+  padding-right: 6rem;
+  background-color: #212225;
+  margin-block-start: 0.2em;
+  margin-block-end: 0.2em;
+}
+
+.main {
+  grid-column: 2;
+  padding-left: 2rem;
+}
+
+section {
+  background-color: #191a1d;
+  border-radius: 12px;
+}
+
+.sorting {
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 3rem;
+  gap: 2rem;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.sorting button {
+  border: none;
+  width: 6rem;
+  background-color: #212225;
+  color: rgb(184, 184, 184);
+  border-radius: 6px;
+}
+
+.pokemon-card {
+  padding: 1rem;
+  background-color: #212225;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.all-pokemon-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.pokemon-image {
+  width: 100%;
+}
+
+.name {
+  color: white;
+  font-size: larger;
+}
+
+.info {
+  display: flex;
+  gap: 0.5rem;
+  background-color: #28292e;
+}
+
+.favoriteEmpty {
+  background-color: #212225;
+  border: none;
+  color: white;
+  cursor: pointer;
+  justify-self: end;
+}
+
+.headline {
+  display: flex;
+  gap: 2rem;
+}
