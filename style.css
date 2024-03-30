@@ -203,6 +203,7 @@ aside {
 .content-layout {
   display: flex;
   justify-content: space-around;
+  gap: 3rem;
 }
 .modal-image {
   max-width: 400px;
