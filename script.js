@@ -1,55 +1,85 @@
-async function GetPokemons() {
-  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=200");
-  const data = await res.json();
+"use strict";
+window.addEventListener("DOMContentLoaded", start);
 
-  const pokemonData = await Promise.all(
-    data.results.map(async (pokemon) => {
-      const res = await fetch(pokemon.url);
-      const pokemonData = await res.json();
-      const typeNames = pokemonData.types.map((type) => type.type.name);
-      // const abilityNames = pokemonData.abilities.map(
-      //   (ability) => ability.ability.name
-      // );
-      const abilityPromises = pokemonData.abilities.map(async (ability) => {
-        const abilityRes = await fetch(ability.ability.url);
-        const abilityData = await abilityRes.json();
-        const englishEffect = abilityData.effect_entries.find(
-          (entry) => entry.language.name === "en"
-        );
-        return {
-          name: ability.ability.name,
-          effect: englishEffect ? englishEffect.effect : "Effect not available",
-        };
-      });
-      const abilities = await Promise.all(abilityPromises);
-      console.log(abilities, "abilities");
+let allPokemons = [];
 
-      return {
-        pokemonData: pokemonData,
-        name: pokemon.name,
-        imageUrl: pokemonData.sprites.other["official-artwork"].front_default,
-        desc: pokemonData.weight,
-        exp: pokemonData.base_experience,
-        types: typeNames,
+const Pokemon = {
+  name: "",
+  image: "",
+  weight: 0,
+  exp: 0,
+  types: [],
+  abilities: [],
+};
 
-        abilities: abilities,
-      };
-    })
-  );
+function start() {
+  console.log("ready");
 
-  DisplayPokemonCards(pokemonData);
+  //TO DO : Add event listeners to filter and sort buttons
+
+  GetPokemons();
 }
 
-function DisplayPokemonCards(pokemonData) {
+// fetch all pokemons
+async function GetPokemons() {
+  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=200");
+  const data = await response.json();
+  console.log("all pokemons in get pokemons", data);
+  // when loaded, prepare data objects
+  PreparAllPokemons(data);
+}
+
+// prepare all Pokemons array
+async function PreparAllPokemons(data) {
+  allPokemons = await Promise.all(
+    data.results.map((pokemonItem) => PrepareObject(pokemonItem))
+  );
+  console.log("all pokemons in PREPARE objects", allPokemons);
+  // TO DO : this might not be the function to call first
+  DisplayPokemonCards(allPokemons);
+}
+
+// Prepare pokemon object
+async function PrepareObject(pokemonItem) {
+  const res = await fetch(pokemonItem.url);
+  const pokemonDetails = await res.json();
+  const typeNames = pokemonDetails.types.map((type) => type.type.name);
+  const abilityPromises = pokemonDetails.abilities.map(async (ability) => {
+    const abilityRes = await fetch(ability.ability.url);
+    const abilityData = await abilityRes.json();
+    const englishEffect = abilityData.effect_entries.find(
+      (entry) => entry.language.name === "en"
+    );
+    return {
+      name: ability.ability.name,
+      effect: englishEffect ? englishEffect.effect : "Effect not available",
+    };
+  });
+  const abilities = await Promise.all(abilityPromises);
+
+  //create object for each pokemon based on the Object Prototype
+  const pokemon = Object.create(Pokemon);
+  pokemon.name = pokemonItem.name;
+  pokemon.image =
+    pokemonDetails.sprites.other["official-artwork"].front_default;
+  pokemon.weight = pokemonDetails.weight;
+  pokemon.exp = pokemonDetails.base_experience;
+  pokemon.types = typeNames;
+  pokemon.abilities = abilities;
+  return pokemon;
+}
+
+// Display List of pokemons
+function DisplayPokemonCards(allPokemons) {
   const pokemonCardsContainer = document.querySelector(".all-pokemon-cards");
   const template = document.querySelector("#pokemon-card-template");
 
-  pokemonData.forEach((pokemon) => {
+  allPokemons.forEach((pokemon) => {
     const clone = template.content.cloneNode(true);
 
-    clone.querySelector("img").src = pokemon.imageUrl;
+    clone.querySelector("img").src = pokemon.image; // Changed pokemon.imageUrl to pokemon.image
     clone.querySelector(".name").textContent = pokemon.name.toUpperCase();
-    clone.querySelector(".weight").textContent = `${pokemon.desc} kg`;
+    clone.querySelector(".weight").textContent = `${pokemon.weight} kg`; // Changed pokemon.desc to pokemon.weight
     clone.querySelector(".types").textContent = pokemon.types.join(", ");
     clone.querySelector(".exp").textContent = pokemon.exp;
     clone.querySelector(".pokemon-card").addEventListener("click", () => {
@@ -58,6 +88,7 @@ function DisplayPokemonCards(pokemonData) {
     pokemonCardsContainer.appendChild(clone);
   });
 }
+
 // Display modal function
 function displayModal(pokemon) {
   const modal = document.getElementById("modal");
@@ -68,9 +99,9 @@ function displayModal(pokemon) {
   const modalExp = document.querySelector(".modal-exp");
   const modalAbilities = document.querySelector(".modal-abilities");
 
-  modalImage.src = pokemon.imageUrl;
+  modalImage.src = pokemon.image;
   modalName.textContent = pokemon.name.toUpperCase();
-  modalWeight.textContent = pokemon.desc;
+  modalWeight.textContent = pokemon.weight;
   modalTypes.textContent = pokemon.types.join(", ");
   modalExp.textContent = pokemon.exp;
 
@@ -109,5 +140,3 @@ function displayModal(pokemon) {
     }
   };
 }
-
-GetPokemons();
