@@ -1,7 +1,7 @@
 "use strict";
 window.addEventListener("DOMContentLoaded", start);
 
-let allPokemons = [];
+let AllPokemons = [];
 
 const Pokemon = {
   name: "",
@@ -13,30 +13,40 @@ const Pokemon = {
 };
 
 function start() {
-  console.log("ready");
-
-  //TO DO : Add event listeners to filter and sort buttons
+  RegisterButtons();
 
   GetPokemons();
 }
 
-// fetch all pokemons
+function RegisterButtons() {
+  document
+    .querySelectorAll("[data-action='filter']")
+    .forEach((button) => button.addEventListener("click", SelectFilter));
+}
+
+function SelectFilter(event) {
+  const filter = event.target.dataset.filter;
+  console.log("user selcted filter", filter);
+
+  filterList(filter);
+}
+
+//fetch all pokemons
 async function GetPokemons() {
   const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=200");
   const data = await response.json();
-  console.log("all pokemons in get pokemons", data);
+
   // when loaded, prepare data objects
   PreparAllPokemons(data);
 }
 
 // prepare all Pokemons array
 async function PreparAllPokemons(data) {
-  allPokemons = await Promise.all(
+  AllPokemons = await Promise.all(
     data.results.map((pokemonItem) => PrepareObject(pokemonItem))
   );
-  console.log("all pokemons in PREPARE objects", allPokemons);
-  // TO DO : this might not be the function to call first
-  DisplayPokemonCards(allPokemons);
+
+  DisplayPokemonList(AllPokemons);
 }
 
 // Prepare pokemon object
@@ -69,17 +79,34 @@ async function PrepareObject(pokemonItem) {
   return pokemon;
 }
 
+function filterList(filter) {
+  let filteredList = AllPokemons;
+
+  if (filter) {
+    filteredList = AllPokemons.filter((pokemon) => isThisType(pokemon, filter));
+  }
+  console.log(filteredList);
+
+  DisplayPokemonList(filteredList);
+}
+
+function isThisType(pokemon, filter) {
+  return pokemon.types.includes(filter);
+}
+
 // Display List of pokemons
-function DisplayPokemonCards(allPokemons) {
+function DisplayPokemonList(allPokemons) {
   const pokemonCardsContainer = document.querySelector(".all-pokemon-cards");
+
+  pokemonCardsContainer.innerHTML = "";
   const template = document.querySelector("#pokemon-card-template");
 
   allPokemons.forEach((pokemon) => {
     const clone = template.content.cloneNode(true);
 
-    clone.querySelector("img").src = pokemon.image; // Changed pokemon.imageUrl to pokemon.image
+    clone.querySelector("img").src = pokemon.image;
     clone.querySelector(".name").textContent = pokemon.name.toUpperCase();
-    clone.querySelector(".weight").textContent = `${pokemon.weight} kg`; // Changed pokemon.desc to pokemon.weight
+    clone.querySelector(".weight").textContent = `${pokemon.weight} kg`;
     clone.querySelector(".types").textContent = pokemon.types.join(", ");
     clone.querySelector(".exp").textContent = pokemon.exp;
     clone.querySelector(".pokemon-card").addEventListener("click", () => {

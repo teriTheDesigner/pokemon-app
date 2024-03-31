@@ -110,34 +110,35 @@
         </button>
       </section>
       <section class="all-pokemon-cards">
-        <template id="pokemon-card-template">
-          <div class="pokemon-card">
-            <div class="headline">
-              <p class="name"></p>
-              <p class="favoriteEmpty">
-                <span class="material-symbols-outlined"> favorite </span>
-              </p>
+        <!-- template will be cloned here  -->
+      </section>
+      <template id="pokemon-card-template">
+        <div class="pokemon-card">
+          <div class="headline">
+            <p class="name"></p>
+            <p class="favoriteEmpty">
+              <span class="material-symbols-outlined"> favorite </span>
+            </p>
+          </div>
+
+          <img class="pokemon-image" alt="pokemon" />
+
+          <div class="info">
+            <div class="infodiv">
+              <p class="weight"></p>
+              <p>WEIGHT</p>
             </div>
-
-            <img class="pokemon-image" alt="pokemon" />
-
-            <div class="info">
-              <div class="infodiv">
-                <p class="weight"></p>
-                <p>WEIGHT</p>
-              </div>
-              <div class="infodiv">
-                <p class="types"></p>
-                <p>TYPE</p>
-              </div>
-              <div class="infodiv">
-                <p class="exp"></p>
-                <p>XP</p>
-              </div>
+            <div class="infodiv">
+              <p class="types"></p>
+              <p>TYPE</p>
+            </div>
+            <div class="infodiv">
+              <p class="exp"></p>
+              <p>XP</p>
             </div>
           </div>
-        </template>
-      </section>
+        </div>
+      </template>
     </main>
     <div id="modal" class="modal">
       <div class="modal-content">
@@ -149,7 +150,7 @@
             <p>
               <strong>Weight:</strong> <span class="modal-weight"></span> kg
             </p>
-            <p><strong>Types:</strong> <span class="modal-types"></span></p>
+            <p><strong>Type:</strong> <span class="modal-types"></span></p>
             <p><strong>Experience:</strong> <span class="modal-exp"></span></p>
             <p>
               <strong>Abilities</strong>
