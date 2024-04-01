@@ -123,6 +123,7 @@ async function PrepareObject(pokemonItem) {
   pokemon.exp = pokemonDetails.base_experience;
   pokemon.types = typeNames;
   pokemon.abilities = abilities;
+
   return pokemon;
 }
 
@@ -148,72 +149,19 @@ function isThisType(pokemon, filter) {
 
 function SortList(sortBy) {
   let sortedList = AllPokemons;
-  if (sortBy === "nameUp") {
-    sortedList = sortedList.sort(SortByNameUp);
-  }
-  if (sortBy === "nameDown") {
-    sortedList = sortedList.sort(SortByNameDown);
-  }
-  if (sortBy === "XPDown") {
-    sortedList = sortedList.sort(SortByXPDown);
-  }
-  if (sortBy === "XPUp") {
-    sortedList = sortedList.sort(SortByXPUp);
-  }
-  if (sortBy === "weightDown") {
-    sortedList = sortedList.sort(SortByWeightDown);
-  }
-  if (sortBy === "weightUp") {
-    sortedList = sortedList.sort(SortByWeightUp);
+
+  sortedList = sortedList.sort(SortByProperty);
+
+  function SortByProperty(pokemon1, pokemon2) {
+    console.log("sortby is", sortBy);
+    if (pokemon1[sortBy] < pokemon2[sortBy]) {
+      return -1;
+    } else {
+      return 1;
+    }
   }
 
   DisplayPokemonList(sortedList);
-}
-
-function SortByNameUp(pokemon1, pokemon2) {
-  if (pokemon1.name < pokemon2.name) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
-function SortByNameDown(pokemon1, pokemon2) {
-  if (pokemon1.name < pokemon2.name) {
-    return 1;
-  } else {
-    return -1;
-  }
-}
-
-function SortByXPUp(pokemon1, pokemon2) {
-  if (pokemon1.exp < pokemon2.exp) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
-function SortByXPDown(pokemon1, pokemon2) {
-  if (pokemon1.exp < pokemon2.exp) {
-    return 1;
-  } else {
-    return -1;
-  }
-}
-
-function SortByWeightUp(pokemon1, pokemon2) {
-  if (pokemon1.weight < pokemon2.weight) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
-
-function SortByWeightDown(pokemon1, pokemon2) {
-  if (pokemon1.weight < pokemon2.weight) {
-    return 1;
-  } else {
-    return -1;
-  }
 }
 
 function DisplayPokemonList(allPokemons) {
