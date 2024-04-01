@@ -3,6 +3,7 @@ window.addEventListener("DOMContentLoaded", start);
 
 let AllPokemons = [];
 let FavoritePokemons = [];
+let isFavoriteFilterActive = false;
 
 const Pokemon = {
   name: "",
@@ -11,55 +12,62 @@ const Pokemon = {
   exp: 0,
   types: [],
   abilities: [],
+  favorite: false,
 };
 
 function start() {
+  console.log("start");
   RegisterButtons();
   GetPokemons();
 }
 
-function AddToFavorite(pokemon) {
-  console.log("Favorite Pokemons", pokemon);
+function AddToFavorite(pokemon, event) {
+  console.log("AddToFavorite");
   const index = FavoritePokemons.findIndex((p) => p.name === pokemon.name);
-  const pokemonCard = document.querySelector(
-    `.pokemon-card[data-name="${pokemon.name}"]`
-  );
-  if (index === -1) {
+  pokemon.favorite = !pokemon.favorite; // Toggle favorite property
+  if (pokemon.favorite) {
     FavoritePokemons.push(pokemon);
-    // Set heart icon text content to ❤️
-    if (pokemonCard) {
-      const heartIcon = pokemonCard.querySelector(".favoriteHeart");
-      if (heartIcon) {
-        heartIcon.textContent = "❤️";
-      }
-    }
   } else {
     FavoritePokemons.splice(index, 1);
-    // Set heart icon text content back to "favorite"
-    if (pokemonCard) {
-      const heartIcon = pokemonCard.querySelector(".favoriteHeart");
+  }
+  // If the favorite filter is active, immediately update the UI
+  if (isFavoriteFilterActive) {
+    filterList("favorite");
+  }
+  updateHeartIcon(pokemon);
+}
+
+function updateHeartIcon(pokemon) {
+  const allPokemonCards = document.querySelectorAll(".pokemon-card");
+  allPokemonCards.forEach((card) => {
+    if (card.pokemon === pokemon) {
+      const heartIcon = card.querySelector(".favoriteHeart");
       if (heartIcon) {
-        heartIcon.textContent = "♡";
+        heartIcon.textContent = pokemon.favorite ? "❤️" : "♡";
       }
     }
-  }
-  console.log("Favorite Pokemons:", FavoritePokemons);
+  });
 }
 
 function RegisterButtons() {
+  console.log("RegisterButtons");
   document
     .querySelectorAll("[data-action='filter']")
     .forEach((button) => button.addEventListener("click", SelectFilter));
 }
 
 function SelectFilter(event) {
+  console.log("SelectFilter");
   const filter = event.target.dataset.filter;
+
+  isFavoriteFilterActive = filter === "favorite";
 
   filterList(filter);
 }
 
 //fetch all pokemons
 async function GetPokemons() {
+  console.log("GetPokemons");
   const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=200");
   const data = await response.json();
 
@@ -69,6 +77,7 @@ async function GetPokemons() {
 
 // prepare all Pokemons array
 async function PreparAllPokemons(data) {
+  console.log("PreparAllPokemons");
   AllPokemons = await Promise.all(
     data.results.map((pokemonItem) => PrepareObject(pokemonItem))
   );
@@ -78,6 +87,7 @@ async function PreparAllPokemons(data) {
 
 // Prepare pokemon object
 async function PrepareObject(pokemonItem) {
+  console.log("PrepareObject");
   const res = await fetch(pokemonItem.url);
   const pokemonDetails = await res.json();
   const typeNames = pokemonDetails.types.map((type) => type.type.name);
@@ -107,6 +117,7 @@ async function PrepareObject(pokemonItem) {
 }
 
 function filterList(filter) {
+  console.log("filterList");
   let filteredList = AllPokemons;
   if (filter === "*") {
     filteredList = AllPokemons;
@@ -121,11 +132,12 @@ function filterList(filter) {
 }
 
 function isThisType(pokemon, filter) {
+  console.log("isThisType");
   return pokemon.types.includes(filter);
 }
 
-// Display List of pokemons
 function DisplayPokemonList(allPokemons) {
+  console.log("DisplayPokemonList");
   const pokemonCardsContainer = document.querySelector(".all-pokemon-cards");
   pokemonCardsContainer.innerHTML = "";
   const template = document.querySelector("#pokemon-card-template");
@@ -133,7 +145,6 @@ function DisplayPokemonList(allPokemons) {
   allPokemons.forEach((pokemon) => {
     const clone = template.content.cloneNode(true);
     const card = clone.querySelector(".pokemon-card");
-    card.dataset.name = pokemon.name; // Set custom data attribute
 
     clone.querySelector("img").src = pokemon.image;
     clone.querySelector(".name").textContent = pokemon.name.toUpperCase();
@@ -143,34 +154,29 @@ function DisplayPokemonList(allPokemons) {
 
     const heartIcon = clone.querySelector(".favoriteHeart");
     if (heartIcon) {
-      const index = FavoritePokemons.findIndex((p) => p.name === pokemon.name);
-      heartIcon.textContent = index === -1 ? "♡" : "❤️"; // Update heart icon based on favorite status
+      heartIcon.textContent = pokemon.favorite ? "❤️" : "♡";
     }
+    // Store reference to Pokemon object on card element
+    card.pokemon = pokemon;
 
     // Modify the event listener to open the modal only if not clicking on the heart icon
-    clone.querySelector(".pokemon-card").addEventListener("click", (event) => {
-      if (!event.target.closest(".favoriteHeart")) {
-        displayModal(pokemon);
-      }
+    clone.querySelector(".favoriteHeart").addEventListener("click", (event) => {
+      event.stopPropagation(); // Prevent click event from bubbling up to the card
+      AddToFavorite(pokemon);
+    });
+
+    // Open modal when clicking on the card
+    clone.querySelector(".pokemon-card").addEventListener("click", () => {
+      displayModal(pokemon);
     });
 
     pokemonCardsContainer.appendChild(clone);
-  });
-
-  pokemonCardsContainer.addEventListener("click", function (event) {
-    if (event.target.classList.contains("favoriteHeart")) {
-      const pokemonCard = event.target.closest(".pokemon-card");
-      const pokemonName = pokemonCard.dataset.name;
-      const pokemon = allPokemons.find((p) => p.name === pokemonName);
-      if (pokemon) {
-        AddToFavorite(pokemon);
-      }
-    }
   });
 }
 
 // Display modal function
 function displayModal(pokemon) {
+  console.log("DisplayModal");
   const modal = document.getElementById("modal");
   const modalImage = document.querySelector(".modal-image");
   const modalName = document.querySelector(".modal-name");
