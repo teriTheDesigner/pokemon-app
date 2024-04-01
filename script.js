@@ -21,16 +21,16 @@ function start() {
   GetPokemons();
 }
 
-function AddToFavorite(pokemon, event) {
+function AddToFavorite(pokemon) {
   console.log("AddToFavorite");
   const index = FavoritePokemons.findIndex((p) => p.name === pokemon.name);
-  pokemon.favorite = !pokemon.favorite; // Toggle favorite property
+  pokemon.favorite = !pokemon.favorite;
   if (pokemon.favorite) {
-    FavoritePokemons.push(pokemon);
+    FavoritePokemons.unshift(pokemon);
   } else {
     FavoritePokemons.splice(index, 1);
   }
-  // If the favorite filter is active, immediately update the UI
+
   if (isFavoriteFilterActive) {
     filterList("favorite");
   }
