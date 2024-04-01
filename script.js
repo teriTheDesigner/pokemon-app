@@ -71,8 +71,9 @@ function SelectFilter(event) {
 function SelectSort(event) {
   console.log("SelectSort");
   const sortBy = event.target.dataset.sort;
+  const sortDir = event.target.dataset.sortDirection;
   console.log("SelectSort", sortBy);
-  SortList(sortBy);
+  SortList(sortBy, sortDir);
 }
 
 //fetch all pokemons
@@ -147,17 +148,23 @@ function isThisType(pokemon, filter) {
   return pokemon.types.includes(filter);
 }
 
-function SortList(sortBy) {
+function SortList(sortBy, sortDir) {
   let sortedList = AllPokemons;
+  let direction = 1;
+  if (sortDir === "desc") {
+    direction = -1;
+  } else {
+    direction = 1;
+  }
 
   sortedList = sortedList.sort(SortByProperty);
 
   function SortByProperty(pokemon1, pokemon2) {
-    console.log("sortby is", sortBy);
+    console.log("sortby is", sortBy, sortDir);
     if (pokemon1[sortBy] < pokemon2[sortBy]) {
-      return -1;
+      return -1 * direction;
     } else {
-      return 1;
+      return 1 * direction;
     }
   }
 
