@@ -24,6 +24,7 @@ const settings = {
 function start() {
   RegisterButtons();
   GetPokemons();
+  initializeAutocomplete();
 }
 
 // add or remove from favorite list
@@ -196,6 +197,54 @@ function BuildList() {
   const sortedList = SortList(currentList);
 
   DisplayPokemonList(sortedList);
+}
+
+// Autocomplete Dropdown Search
+
+function initializeAutocomplete() {
+  const searchInput = document.getElementById("search");
+  const autocomplete = document.querySelector(".autocomplete");
+
+  searchInput.addEventListener("input", function () {
+    const searchQuery = this.value.toLowerCase();
+    const filteredPokemons = AllPokemons.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(searchQuery)
+    );
+    displayAutocomplete(filteredPokemons);
+    DisplayPokemonList(filteredPokemons);
+  });
+
+  // Close autocomplete when clicking outside only if it's visible
+  window.addEventListener("click", function (event) {
+    if (
+      autocomplete.style.display !== "none" &&
+      !event.target.closest(".autocomplete")
+    ) {
+      autocomplete.style.display = "none";
+    }
+  });
+
+  function displayAutocomplete(pokemons) {
+    autocomplete.innerHTML = "";
+    pokemons.forEach((pokemon) => {
+      const item = document.createElement("div");
+      item.classList.add("autocomplete-item");
+      item.textContent = pokemon.name;
+      item.addEventListener("click", function () {
+        searchInput.value = pokemon.name;
+        autocomplete.innerHTML = "";
+        DisplayPokemonList([pokemon]);
+      });
+      autocomplete.appendChild(item);
+    });
+
+    // Show autocomplete if there are items to display
+    if (pokemons.length > 0) {
+      autocomplete.style.display = "block";
+    } else {
+      autocomplete.style.display = "none";
+    }
+  }
 }
 
 // Display the list of pokemons
