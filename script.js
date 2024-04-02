@@ -60,12 +60,36 @@ function updateHeartIcon(pokemon) {
 
 // Listen to events on filter and sort buttons
 function RegisterButtons() {
-  document
-    .querySelectorAll("[data-action='filter']")
-    .forEach((button) => button.addEventListener("click", SelectFilter));
-  document
-    .querySelectorAll("[data-action='sort']")
-    .forEach((button) => button.addEventListener("click", SelectSort));
+  document.querySelectorAll("[data-action='filter']").forEach((button) =>
+    button.addEventListener("click", function (event) {
+      SelectFilter(event);
+      ChangeColor(event);
+    })
+  );
+
+  document.querySelectorAll("[data-action='sort']").forEach((button) =>
+    button.addEventListener("click", function (event) {
+      SelectSort(event);
+      ChangeColor(event);
+    })
+  );
+}
+
+// change color of clicked buttons
+function ChangeColor(event) {
+  if (event.target.dataset.action === "sort") {
+    document.querySelectorAll(".sort").forEach((btn) => {
+      btn.classList.remove("active");
+    });
+    event.target.classList.add("active");
+  }
+
+  if (event.target.dataset.action === "filter") {
+    document.querySelectorAll(".type").forEach((btn) => {
+      btn.classList.remove("active");
+    });
+    event.target.classList.add("active");
+  }
 }
 
 // Get value of selected filter

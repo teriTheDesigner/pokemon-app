@@ -20,79 +20,85 @@
   </head>
   <body class="inter">
     <aside>
-      <p class="type" data-action="filter" data-filter="*">
+      <button class="type" data-action="filter" data-filter="*">
         <span class="material-symbols-outlined"> apps </span>All Types
-      </p>
-      <p class="type" data-action="filter" data-filter="favorite">
+      </button>
+      <button class="type" data-action="filter" data-filter="favorite">
         <span class="material-symbols-outlined"> favorite </span> My Favorites
-      </p>
+      </button>
 
-      <p class="type" data-action="filter" data-filter="bug">
+      <button class="type" data-action="filter" data-filter="bug">
         <span class="material-symbols-outlined"> bug_report </span>Bug
-      </p>
-      <p class="type" data-action="filter" data-filter="dark">
+      </button>
+      <button class="type" data-action="filter" data-filter="dark">
         <span class="material-symbols-outlined"> dark_mode </span>Dark
-      </p>
-      <p class="type" data-action="filter" data-filter="dragon">
+      </button>
+      <button class="type" data-action="filter" data-filter="dragon">
         <span class="material-symbols-outlined">
           sentiment_extremely_dissatisfied </span
         >Dragon
-      </p>
-      <p class="type" data-action="filter" data-filter="ghost">
+      </button>
+      <button class="type" data-action="filter" data-filter="ghost">
         <span class="material-symbols-outlined"> robot </span>Ghost
-      </p>
-      <p class="type" data-action="filter" data-filter="grass">
+      </button>
+      <button class="type" data-action="filter" data-filter="grass">
         <span class="material-symbols-outlined"> eco </span>Grass
-      </p>
-      <p class="type" data-action="filter" data-filter="ground">
+      </button>
+      <button class="type" data-action="filter" data-filter="ground">
         <span class="material-symbols-outlined"> filter_hdr </span>Ground
-      </p>
-      <p class="type" data-action="filter" data-filter="ice">
+      </button>
+      <button class="type" data-action="filter" data-filter="ice">
         <span class="material-symbols-outlined"> ac_unit </span>Ice
-      </p>
-      <p class="type" data-action="filter" data-filter="electric">
+      </button>
+      <button class="type" data-action="filter" data-filter="electric">
         <span class="material-symbols-outlined"> flash_on </span>Electric
-      </p>
-      <p class="type" data-action="filter" data-filter="fairy">
+      </button>
+      <button class="type" data-action="filter" data-filter="fairy">
         <span class="material-symbols-outlined"> hotel_class </span>Fairy
-      </p>
-      <p class="type" data-action="filter" data-filter="fighting">
+      </button>
+      <button class="type" data-action="filter" data-filter="fighting">
         <span class="material-symbols-outlined"> sports_mma </span>Fighting
-      </p>
-      <p class="type" data-action="filter" data-filter="flying">
+      </button>
+      <button class="type" data-action="filter" data-filter="flying">
         <span class="material-symbols-outlined"> raven </span>Flying
-      </p>
-      <p class="type" data-action="filter" data-filter="normal">
+      </button>
+      <button class="type" data-action="filter" data-filter="normal">
         <span class="material-symbols-outlined"> circle </span>Normal
-      </p>
-      <p class="type" data-action="filter" data-filter="poison">
+      </button>
+      <button class="type" data-action="filter" data-filter="poison">
         <span class="material-symbols-outlined"> skull </span>Poison
-      </p>
-      <p class="type" data-action="filter" data-filter="psychic">
+      </button>
+      <button class="type" data-action="filter" data-filter="psychic">
         <span class="material-symbols-outlined"> cognition </span>Psychic
-      </p>
-      <p class="type" data-action="filter" data-filter="rock">
+      </button>
+      <button class="type" data-action="filter" data-filter="rock">
         <span class="material-symbols-outlined"> line_style </span>Rock
-      </p>
-      <p class="type" data-action="filter" data-filter="steel">
+      </button>
+      <button class="type" data-action="filter" data-filter="steel">
         <span class="material-symbols-outlined"> exercise </span>Steel
-      </p>
-      <p class="type" data-action="filter" data-filter="fire">
+      </button>
+      <button class="type" data-action="filter" data-filter="fire">
         <span class="material-symbols-outlined"> local_fire_department </span
         >Fire
-      </p>
-      <p class="type" data-action="filter" data-filter="water">
+      </button>
+      <button class="type" data-action="filter" data-filter="water">
         <span class="material-symbols-outlined"> water_drop </span>Water
-      </p>
+      </button>
     </aside>
     <main>
       <section class="sorting">
         <p>Sort Pokemons by:</p>
-        <button data-action="sort" data-sort-direction="asc" data-sort="weight">
+        <button
+          class="sort"
+          data-action="sort"
+          data-sort-direction="asc"
+          data-sort="weight"
+        >
           <span class="material-symbols-outlined"> arrow_upward </span>
           Weight
         </button>
         <button
+          class="sort"
           data-action="sort"
           data-sort-direction="desc"
           data-sort="weight"
@@ -100,23 +106,43 @@
           <span class="material-symbols-outlined"> arrow_downward </span>
           Weight
         </button>
-        <button data-action="sort" data-sort-direction="asc" data-sort="exp">
+        <button
+          class="sort"
+          data-action="sort"
+          data-sort-direction="asc"
+          data-sort="exp"
+        >
           <span class="material-symbols-outlined"> arrow_upward </span> XP
         </button>
-        <button data-action="sort" data-sort-direction="desc" data-sort="exp">
+        <button
+          class="sort"
+          data-action="sort"
+          data-sort-direction="desc"
+          data-sort="exp"
+        >
           <span class="material-symbols-outlined"> arrow_downward</span> XP
         </button>
-        <button data-action="sort" data-sort-direction="asc" data-sort="name">
+        <button
+          class="sort"
+          data-action="sort"
+          data-sort-direction="asc"
+          data-sort="name"
+        >
           <span class="material-symbols-outlined"> arrow_upward </span> Z-A
         </button>
-        <button data-action="sort" data-sort-direction="desc" data-sort="name">
+        <button
+          class="sort"
+          data-action="sort"
+          data-sort-direction="desc"
+          data-sort="name"
+        >
           <span class="material-symbols-outlined"> arrow_downward</span> A-Z
         </button>
         <div class="search-wrapper">
           <input
             type="search"
             id="search"
-            placeholder="🔍 Search..."
+            placeholder="Search..."
             autocomplete="off"
           />
           <div class="autocomplete"></div>

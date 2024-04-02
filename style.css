@@ -31,9 +31,10 @@ aside {
 }
 
 .type {
+  border: none;
+  color: #aaa;
   cursor: pointer;
   display: flex;
-  padding: 0.2rem;
   padding-left: 0.5rem;
   border-radius: 6px;
   gap: 1rem;
@@ -45,10 +46,15 @@ aside {
 }
 
 .type:hover {
-  background-color: #2f3037;
-  transition: 0.4s;
+  background-color: #3a3a43;
+  transition: 0.5s;
 }
 
+.type.active {
+  background-color: #3a3a43;
+
+  transition: 0.5s;
+}
 /* Sorting Section Styles */
 .sorting {
   display: flex;
@@ -79,8 +85,13 @@ aside {
 }
 
 .sorting button:hover {
-  background-color: #2f3037;
-  transition: 0.4s;
+  background-color: #3a3a43;
+  transition: 0.3s;
+}
+
+.sort.active {
+  background-color: #3a3a43 !important;
+  transition: 0.3s;
 }
 
 /* Search Bar Styles */
