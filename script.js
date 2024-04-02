@@ -22,13 +22,12 @@ const settings = {
 };
 
 function start() {
-  console.log("start");
   RegisterButtons();
   GetPokemons();
 }
 
+// add or remove from favorite list
 function AddToFavorite(pokemon) {
-  console.log("AddToFavorite");
   const index = FavoritePokemons.findIndex((p) => p.name === pokemon.name);
   pokemon.favorite = !pokemon.favorite;
   if (pokemon.favorite) {
@@ -45,6 +44,7 @@ function AddToFavorite(pokemon) {
   updateHeartIcon(pokemon);
 }
 
+// update Heart icon when adding / removing from favorite list
 function updateHeartIcon(pokemon) {
   const allPokemonCards = document.querySelectorAll(".pokemon-card");
   allPokemonCards.forEach((card) => {
@@ -57,8 +57,8 @@ function updateHeartIcon(pokemon) {
   });
 }
 
+// Listen to events on filter and sort buttons
 function RegisterButtons() {
-  console.log("RegisterButtons");
   document
     .querySelectorAll("[data-action='filter']")
     .forEach((button) => button.addEventListener("click", SelectFilter));
@@ -67,31 +67,31 @@ function RegisterButtons() {
     .forEach((button) => button.addEventListener("click", SelectSort));
 }
 
+// Get value of selected filter
 function SelectFilter(event) {
-  console.log("SelectFilter");
   const filter = event.target.dataset.filter;
 
   isFavoriteFilterActive = filter === "favorite";
 
-  // filterList(filter);
   SetFilter(filter);
 }
 
+// set filtering settings
 function SetFilter(filter) {
   settings.filterBy = filter;
 
   BuildList();
 }
 
+// Get value of selected sorting criteria
 function SelectSort(event) {
-  console.log("SelectSort");
   const sortBy = event.target.dataset.sort;
   const sortDir = event.target.dataset.sortDirection;
-  console.log("SelectSort", sortBy);
-  // SortList(sortBy, sortDir);
+
   SetSort(sortBy, sortDir);
 }
 
+// set sorting settings
 function SetSort(sortBy, sortDir) {
   settings.sortBy = sortBy;
   settings.sortDir = sortDir;
@@ -101,7 +101,6 @@ function SetSort(sortBy, sortDir) {
 
 //fetch all pokemons
 async function GetPokemons() {
-  console.log("GetPokemons");
   const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=200");
   const data = await response.json();
 
@@ -111,7 +110,6 @@ async function GetPokemons() {
 
 // prepare all Pokemons array
 async function PreparAllPokemons(data) {
-  console.log("PreparAllPokemons");
   AllPokemons = await Promise.all(
     data.results.map((pokemonItem) => PrepareObject(pokemonItem))
   );
@@ -121,7 +119,6 @@ async function PreparAllPokemons(data) {
 
 // Prepare pokemon object
 async function PrepareObject(pokemonItem) {
-  console.log("PrepareObject");
   const res = await fetch(pokemonItem.url);
   const pokemonDetails = await res.json();
   const typeNames = pokemonDetails.types.map((type) => type.type.name);
@@ -151,9 +148,8 @@ async function PrepareObject(pokemonItem) {
   return pokemon;
 }
 
+// filter the list of pokemons
 function filterList(filteredList) {
-  console.log("filterList");
-  // let filteredList = AllPokemons;
   if (settings.filterBy === "*") {
     filteredList = AllPokemons;
   } else if (settings.filterBy === "favorite") {
@@ -163,18 +159,17 @@ function filterList(filteredList) {
       isThisType(pokemon, settings.filterBy)
     );
   }
-  console.log(filteredList);
 
   return filteredList;
 }
 
+// check the type of pokemon
 function isThisType(pokemon, filter) {
-  console.log("isThisType");
   return pokemon.types.includes(filter);
 }
 
+// Sort the filtered list
 function SortList(sortedList) {
-  // let sortedList = AllPokemons;
   let direction = 1;
   if (settings.sortDir === "desc") {
     direction = -1;
@@ -185,7 +180,6 @@ function SortList(sortedList) {
   sortedList = sortedList.sort(SortByProperty);
 
   function SortByProperty(pokemon1, pokemon2) {
-    console.log("sortby is", settings.sortBy, settings.sortDir);
     if (pokemon1[settings.sortBy] < pokemon2[settings.sortBy]) {
       return -1 * direction;
     } else {
@@ -193,10 +187,10 @@ function SortList(sortedList) {
     }
   }
 
-  // DisplayPokemonList(sortedList);
   return sortedList;
 }
 
+// Build filtered and sorted list
 function BuildList() {
   const currentList = filterList(AllPokemons);
   const sortedList = SortList(currentList);
@@ -204,8 +198,8 @@ function BuildList() {
   DisplayPokemonList(sortedList);
 }
 
+// Display the list of pokemons
 function DisplayPokemonList(allPokemons) {
-  console.log("DisplayPokemonList");
   const pokemonCardsContainer = document.querySelector(".all-pokemon-cards");
   pokemonCardsContainer.innerHTML = "";
   const template = document.querySelector("#pokemon-card-template");
@@ -244,7 +238,6 @@ function DisplayPokemonList(allPokemons) {
 
 // Display modal function
 function displayModal(pokemon) {
-  console.log("DisplayModal");
   const modal = document.getElementById("modal");
   const modalImage = document.querySelector(".modal-image");
   const modalName = document.querySelector(".modal-name");
