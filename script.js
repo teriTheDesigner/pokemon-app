@@ -15,6 +15,12 @@ const Pokemon = {
   favorite: false,
 };
 
+const settings = {
+  filterBy: "*",
+  sortBy: "",
+  sortDir: "asc",
+};
+
 function start() {
   console.log("start");
   RegisterButtons();
@@ -32,7 +38,9 @@ function AddToFavorite(pokemon) {
   }
 
   if (isFavoriteFilterActive) {
-    filterList("favorite");
+    // Filter the list and then update the UI with the filtered list
+    const filteredList = filterList(AllPokemons);
+    DisplayPokemonList(filteredList);
   }
   updateHeartIcon(pokemon);
 }
@@ -65,7 +73,14 @@ function SelectFilter(event) {
 
   isFavoriteFilterActive = filter === "favorite";
 
-  filterList(filter);
+  // filterList(filter);
+  SetFilter(filter);
+}
+
+function SetFilter(filter) {
+  settings.filterBy = filter;
+
+  BuildList();
 }
 
 function SelectSort(event) {
@@ -73,7 +88,15 @@ function SelectSort(event) {
   const sortBy = event.target.dataset.sort;
   const sortDir = event.target.dataset.sortDirection;
   console.log("SelectSort", sortBy);
-  SortList(sortBy, sortDir);
+  // SortList(sortBy, sortDir);
+  SetSort(sortBy, sortDir);
+}
+
+function SetSort(sortBy, sortDir) {
+  settings.sortBy = sortBy;
+  settings.sortDir = sortDir;
+
+  BuildList();
 }
 
 //fetch all pokemons
@@ -128,19 +151,21 @@ async function PrepareObject(pokemonItem) {
   return pokemon;
 }
 
-function filterList(filter) {
+function filterList(filteredList) {
   console.log("filterList");
-  let filteredList = AllPokemons;
-  if (filter === "*") {
+  // let filteredList = AllPokemons;
+  if (settings.filterBy === "*") {
     filteredList = AllPokemons;
-  } else if (filter === "favorite") {
+  } else if (settings.filterBy === "favorite") {
     filteredList = FavoritePokemons;
-  } else if (filter) {
-    filteredList = AllPokemons.filter((pokemon) => isThisType(pokemon, filter));
+  } else if (settings.filterBy) {
+    filteredList = AllPokemons.filter((pokemon) =>
+      isThisType(pokemon, settings.filterBy)
+    );
   }
   console.log(filteredList);
 
-  DisplayPokemonList(filteredList);
+  return filteredList;
 }
 
 function isThisType(pokemon, filter) {
@@ -148,10 +173,10 @@ function isThisType(pokemon, filter) {
   return pokemon.types.includes(filter);
 }
 
-function SortList(sortBy, sortDir) {
-  let sortedList = AllPokemons;
+function SortList(sortedList) {
+  // let sortedList = AllPokemons;
   let direction = 1;
-  if (sortDir === "desc") {
+  if (settings.sortDir === "desc") {
     direction = -1;
   } else {
     direction = 1;
@@ -160,13 +185,21 @@ function SortList(sortBy, sortDir) {
   sortedList = sortedList.sort(SortByProperty);
 
   function SortByProperty(pokemon1, pokemon2) {
-    console.log("sortby is", sortBy, sortDir);
-    if (pokemon1[sortBy] < pokemon2[sortBy]) {
+    console.log("sortby is", settings.sortBy, settings.sortDir);
+    if (pokemon1[settings.sortBy] < pokemon2[settings.sortBy]) {
       return -1 * direction;
     } else {
       return 1 * direction;
     }
   }
+
+  // DisplayPokemonList(sortedList);
+  return sortedList;
+}
+
+function BuildList() {
+  const currentList = filterList(AllPokemons);
+  const sortedList = SortList(currentList);
 
   DisplayPokemonList(sortedList);
 }
