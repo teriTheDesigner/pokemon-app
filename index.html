@@ -18,181 +18,189 @@
     />
     <title>Pokemon</title>
   </head>
-  <body class="inter">
-    <aside>
-      <button class="type" data-action="filter" data-filter="*">
-        <span class="material-symbols-outlined"> apps </span>All Types
-      </button>
-      <button class="type" data-action="filter" data-filter="favorite">
-        <span class="material-symbols-outlined"> favorite </span> My Favorites
-      </button>
+  <body class="inter outer-grid">
+    <div class="inner-grid">
+      <aside>
+        <div>
+          <button class="type" data-action="filter" data-filter="*">
+            <span class="material-symbols-outlined"> apps </span>All Types
+          </button>
+          <button class="type" data-action="filter" data-filter="favorite">
+            <span class="material-symbols-outlined"> favorite </span> My
+            Favorites
+          </button>
 
-      <button class="type" data-action="filter" data-filter="bug">
-        <span class="material-symbols-outlined"> bug_report </span>Bug
-      </button>
-      <button class="type" data-action="filter" data-filter="dark">
-        <span class="material-symbols-outlined"> dark_mode </span>Dark
-      </button>
-      <button class="type" data-action="filter" data-filter="dragon">
-        <span class="material-symbols-outlined">
-          sentiment_extremely_dissatisfied </span
-        >Dragon
-      </button>
-      <button class="type" data-action="filter" data-filter="ghost">
-        <span class="material-symbols-outlined"> robot </span>Ghost
-      </button>
-      <button class="type" data-action="filter" data-filter="grass">
-        <span class="material-symbols-outlined"> eco </span>Grass
-      </button>
-      <button class="type" data-action="filter" data-filter="ground">
-        <span class="material-symbols-outlined"> filter_hdr </span>Ground
-      </button>
-      <button class="type" data-action="filter" data-filter="ice">
-        <span class="material-symbols-outlined"> ac_unit </span>Ice
-      </button>
-      <button class="type" data-action="filter" data-filter="electric">
-        <span class="material-symbols-outlined"> flash_on </span>Electric
-      </button>
-      <button class="type" data-action="filter" data-filter="fairy">
-        <span class="material-symbols-outlined"> hotel_class </span>Fairy
-      </button>
-      <button class="type" data-action="filter" data-filter="fighting">
-        <span class="material-symbols-outlined"> sports_mma </span>Fighting
-      </button>
-      <button class="type" data-action="filter" data-filter="flying">
-        <span class="material-symbols-outlined"> raven </span>Flying
-      </button>
-      <button class="type" data-action="filter" data-filter="normal">
-        <span class="material-symbols-outlined"> circle </span>Normal
-      </button>
-      <button class="type" data-action="filter" data-filter="poison">
-        <span class="material-symbols-outlined"> skull </span>Poison
-      </button>
-      <button class="type" data-action="filter" data-filter="psychic">
-        <span class="material-symbols-outlined"> cognition </span>Psychic
-      </button>
-      <button class="type" data-action="filter" data-filter="rock">
-        <span class="material-symbols-outlined"> line_style </span>Rock
-      </button>
-      <button class="type" data-action="filter" data-filter="steel">
-        <span class="material-symbols-outlined"> exercise </span>Steel
-      </button>
-      <button class="type" data-action="filter" data-filter="fire">
-        <span class="material-symbols-outlined"> local_fire_department </span
-        >Fire
-      </button>
-      <button class="type" data-action="filter" data-filter="water">
-        <span class="material-symbols-outlined"> water_drop </span>Water
-      </button>
-    </aside>
-    <main>
-      <section class="sorting">
-        <p>Sort Pokemons by:</p>
-        <button
-          class="sort"
-          data-action="sort"
-          data-sort-direction="asc"
-          data-sort="weight"
-        >
-          <span class="material-symbols-outlined"> arrow_upward </span>
-          Weight
-        </button>
-        <button
-          class="sort"
-          data-action="sort"
-          data-sort-direction="desc"
-          data-sort="weight"
-        >
-          <span class="material-symbols-outlined"> arrow_downward </span>
-          Weight
-        </button>
-        <button
-          class="sort"
-          data-action="sort"
-          data-sort-direction="asc"
-          data-sort="exp"
-        >
-          <span class="material-symbols-outlined"> arrow_upward </span> XP
-        </button>
-        <button
-          class="sort"
-          data-action="sort"
-          data-sort-direction="desc"
-          data-sort="exp"
-        >
-          <span class="material-symbols-outlined"> arrow_downward</span> XP
-        </button>
-        <button
-          class="sort"
-          data-action="sort"
-          data-sort-direction="asc"
-          data-sort="name"
-        >
-          <span class="material-symbols-outlined"> arrow_upward </span> Z-A
-        </button>
-        <button
-          class="sort"
-          data-action="sort"
-          data-sort-direction="desc"
-          data-sort="name"
-        >
-          <span class="material-symbols-outlined"> arrow_downward</span> A-Z
-        </button>
-        <div class="search-wrapper">
-          <input
-            type="search"
-            id="search"
-            placeholder="Search..."
-            autocomplete="off"
-          />
-          <div class="autocomplete"></div>
+          <button class="type" data-action="filter" data-filter="bug">
+            <span class="material-symbols-outlined"> bug_report </span>Bug
+          </button>
+          <button class="type" data-action="filter" data-filter="dark">
+            <span class="material-symbols-outlined"> dark_mode </span>Dark
+          </button>
+          <button class="type" data-action="filter" data-filter="dragon">
+            <span class="material-symbols-outlined">
+              sentiment_extremely_dissatisfied </span
+            >Dragon
+          </button>
+          <button class="type" data-action="filter" data-filter="ghost">
+            <span class="material-symbols-outlined"> robot </span>Ghost
+          </button>
+          <button class="type" data-action="filter" data-filter="grass">
+            <span class="material-symbols-outlined"> eco </span>Grass
+          </button>
+          <button class="type" data-action="filter" data-filter="ground">
+            <span class="material-symbols-outlined"> filter_hdr </span>Ground
+          </button>
+          <button class="type" data-action="filter" data-filter="ice">
+            <span class="material-symbols-outlined"> ac_unit </span>Ice
+          </button>
+          <button class="type" data-action="filter" data-filter="electric">
+            <span class="material-symbols-outlined"> flash_on </span>Electric
+          </button>
+          <button class="type" data-action="filter" data-filter="fairy">
+            <span class="material-symbols-outlined"> hotel_class </span>Fairy
+          </button>
+          <button class="type" data-action="filter" data-filter="fighting">
+            <span class="material-symbols-outlined"> sports_mma </span>Fighting
+          </button>
+          <button class="type" data-action="filter" data-filter="flying">
+            <span class="material-symbols-outlined"> raven </span>Flying
+          </button>
+          <button class="type" data-action="filter" data-filter="normal">
+            <span class="material-symbols-outlined"> circle </span>Normal
+          </button>
+          <button class="type" data-action="filter" data-filter="poison">
+            <span class="material-symbols-outlined"> skull </span>Poison
+          </button>
+          <button class="type" data-action="filter" data-filter="psychic">
+            <span class="material-symbols-outlined"> cognition </span>Psychic
+          </button>
+          <button class="type" data-action="filter" data-filter="rock">
+            <span class="material-symbols-outlined"> line_style </span>Rock
+          </button>
+          <button class="type" data-action="filter" data-filter="steel">
+            <span class="material-symbols-outlined"> exercise </span>Steel
+          </button>
+          <button class="type" data-action="filter" data-filter="fire">
+            <span class="material-symbols-outlined">
+              local_fire_department </span
+            >Fire
+          </button>
+          <button class="type" data-action="filter" data-filter="water">
+            <span class="material-symbols-outlined"> water_drop </span>Water
+          </button>
         </div>
-      </section>
-      <section class="all-pokemon-cards">
-        <!-- template will be cloned here  -->
-      </section>
-      <template id="pokemon-card-template">
-        <div class="pokemon-card">
-          <div class="headline">
-            <p class="name"></p>
-            <p class="favoriteHeart">♡</p>
+      </aside>
+      <main>
+        <section class="sorting">
+          <p>Sort Pokemons by:</p>
+          <button
+            class="sort"
+            data-action="sort"
+            data-sort-direction="asc"
+            data-sort="weight"
+          >
+            <span class="material-symbols-outlined"> arrow_upward </span>
+            Weight
+          </button>
+          <button
+            class="sort"
+            data-action="sort"
+            data-sort-direction="desc"
+            data-sort="weight"
+          >
+            <span class="material-symbols-outlined"> arrow_downward </span>
+            Weight
+          </button>
+          <button
+            class="sort"
+            data-action="sort"
+            data-sort-direction="asc"
+            data-sort="exp"
+          >
+            <span class="material-symbols-outlined"> arrow_upward </span> XP
+          </button>
+          <button
+            class="sort"
+            data-action="sort"
+            data-sort-direction="desc"
+            data-sort="exp"
+          >
+            <span class="material-symbols-outlined"> arrow_downward</span> XP
+          </button>
+          <button
+            class="sort"
+            data-action="sort"
+            data-sort-direction="asc"
+            data-sort="name"
+          >
+            <span class="material-symbols-outlined"> arrow_upward </span> Z-A
+          </button>
+          <button
+            class="sort"
+            data-action="sort"
+            data-sort-direction="desc"
+            data-sort="name"
+          >
+            <span class="material-symbols-outlined"> arrow_downward</span> A-Z
+          </button>
+          <div class="search-wrapper">
+            <input
+              type="search"
+              id="search"
+              placeholder="Search..."
+              autocomplete="off"
+            />
+            <div class="autocomplete"></div>
           </div>
-
-          <img class="pokemon-image" alt="pokemon" />
-
-          <div class="info">
-            <div class="infodiv">
-              <p class="weight"></p>
-              <p>WEIGHT</p>
+        </section>
+        <section class="all-pokemon-cards">
+          <!-- template will be cloned here  -->
+        </section>
+        <template id="pokemon-card-template">
+          <div class="pokemon-card">
+            <div class="headline">
+              <p class="name"></p>
+              <p class="favoriteHeart">♡</p>
             </div>
-            <div class="infodiv">
-              <p class="types"></p>
-              <p>TYPE</p>
-            </div>
-            <div class="infodiv">
-              <p class="exp"></p>
-              <p>XP</p>
+
+            <img class="pokemon-image" alt="pokemon" />
+
+            <div class="info">
+              <div class="infodiv">
+                <p class="weight"></p>
+                <p>WEIGHT</p>
+              </div>
+              <div class="infodiv">
+                <p class="types"></p>
+                <p>TYPE</p>
+              </div>
+              <div class="infodiv">
+                <p class="exp"></p>
+                <p>XP</p>
+              </div>
             </div>
           </div>
-        </div>
-      </template>
-    </main>
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="content-layout">
-          <img class="modal-image" src="" alt="Pokemon Image" />
-          <div>
-            <h2 class="modal-name">Name</h2>
-            <p>
-              <strong>Weight:</strong> <span class="modal-weight"></span> kg
-            </p>
-            <p><strong>Type:</strong> <span class="modal-types"></span></p>
-            <p><strong>Experience:</strong> <span class="modal-exp"></span></p>
-            <p>
-              <strong>Abilities</strong>
-            </p>
-            <div class="modal-abilities"></div>
+        </template>
+      </main>
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div class="content-layout">
+            <img class="modal-image" src="" alt="Pokemon Image" />
+            <div>
+              <h2 class="modal-name">Name</h2>
+              <p>
+                <strong>Weight:</strong> <span class="modal-weight"></span> kg
+              </p>
+              <p><strong>Type:</strong> <span class="modal-types"></span></p>
+              <p>
+                <strong>Experience:</strong> <span class="modal-exp"></span>
+              </p>
+              <p>
+                <strong>Abilities</strong>
+              </p>
+              <div class="modal-abilities"></div>
+            </div>
           </div>
         </div>
       </div>
