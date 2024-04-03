@@ -293,41 +293,6 @@ function initializeAutocomplete() {
 }
 
 // Display the list of pokemons
-// function DisplayPokemonList(allPokemons) {
-//   const pokemonCardsContainer = document.querySelector(".all-pokemon-cards");
-//   pokemonCardsContainer.innerHTML = "";
-//   const template = document.querySelector("#pokemon-card-template");
-
-//   allPokemons.forEach((pokemon) => {
-//     const clone = template.content.cloneNode(true);
-//     const card = clone.querySelector(".pokemon-card");
-
-//     clone.querySelector("img").src = pokemon.image;
-//     clone.querySelector(".name").textContent = pokemon.name.toUpperCase();
-//     clone.querySelector(".weight").textContent = `${pokemon.weight} kg`;
-//     clone.querySelector(".types").textContent = pokemon.types.join(", ");
-//     clone.querySelector(".exp").textContent = pokemon.exp;
-
-//     const heartIcon = clone.querySelector(".favoriteHeart");
-//     if (heartIcon) {
-//       heartIcon.textContent = pokemon.favorite ? "❤️" : "♡";
-//     }
-//     // Store reference to Pokemon object on card element
-//     card.pokemon = pokemon;
-
-//     // Modify the event listener to open the modal only if not clicking on the heart icon
-//     clone.querySelector(".favoriteHeart").addEventListener("click", (event) => {
-//       event.stopPropagation(); // Prevent click event from bubbling up to the card
-//       AddToFavorite(pokemon);
-//     });
-
-//     // Open modal when clicking on the card
-//     clone.querySelector(".pokemon-card").addEventListener("click", () => {
-//       displayModal(pokemon);
-//     });
-
-//     pokemonCardsContainer.appendChild(clone);
-//   });
 function DisplayPokemonList(allPokemons) {
   const pokemonCardsContainer = document.querySelector(".all-pokemon-cards");
   pokemonCardsContainer.innerHTML = "";
