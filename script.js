@@ -21,6 +21,27 @@ const settings = {
   sortDir: "asc",
 };
 
+const typeIcons = {
+  bug: "bug_report",
+  dark: "dark_mode",
+  dragon: "sentiment_extremely_dissatisfied",
+  electric: "flash_on",
+  fairy: "hotel_class",
+  fighting: "sports_mma",
+  fire: "local_fire_department",
+  flying: "raven",
+  ghost: "robot",
+  grass: "eco",
+  ground: "filter_hdr",
+  ice: "ac_unit",
+  normal: "circle",
+  poison: "skull",
+  psychic: "cognition",
+  rock: "line_style",
+  steel: "exercise",
+  water: "water_drop",
+};
+
 function start() {
   RegisterButtons();
   GetPokemons();
@@ -272,6 +293,41 @@ function initializeAutocomplete() {
 }
 
 // Display the list of pokemons
+// function DisplayPokemonList(allPokemons) {
+//   const pokemonCardsContainer = document.querySelector(".all-pokemon-cards");
+//   pokemonCardsContainer.innerHTML = "";
+//   const template = document.querySelector("#pokemon-card-template");
+
+//   allPokemons.forEach((pokemon) => {
+//     const clone = template.content.cloneNode(true);
+//     const card = clone.querySelector(".pokemon-card");
+
+//     clone.querySelector("img").src = pokemon.image;
+//     clone.querySelector(".name").textContent = pokemon.name.toUpperCase();
+//     clone.querySelector(".weight").textContent = `${pokemon.weight} kg`;
+//     clone.querySelector(".types").textContent = pokemon.types.join(", ");
+//     clone.querySelector(".exp").textContent = pokemon.exp;
+
+//     const heartIcon = clone.querySelector(".favoriteHeart");
+//     if (heartIcon) {
+//       heartIcon.textContent = pokemon.favorite ? "❤️" : "♡";
+//     }
+//     // Store reference to Pokemon object on card element
+//     card.pokemon = pokemon;
+
+//     // Modify the event listener to open the modal only if not clicking on the heart icon
+//     clone.querySelector(".favoriteHeart").addEventListener("click", (event) => {
+//       event.stopPropagation(); // Prevent click event from bubbling up to the card
+//       AddToFavorite(pokemon);
+//     });
+
+//     // Open modal when clicking on the card
+//     clone.querySelector(".pokemon-card").addEventListener("click", () => {
+//       displayModal(pokemon);
+//     });
+
+//     pokemonCardsContainer.appendChild(clone);
+//   });
 function DisplayPokemonList(allPokemons) {
   const pokemonCardsContainer = document.querySelector(".all-pokemon-cards");
   pokemonCardsContainer.innerHTML = "";
@@ -284,8 +340,19 @@ function DisplayPokemonList(allPokemons) {
     clone.querySelector("img").src = pokemon.image;
     clone.querySelector(".name").textContent = pokemon.name.toUpperCase();
     clone.querySelector(".weight").textContent = `${pokemon.weight} kg`;
-    clone.querySelector(".types").textContent = pokemon.types.join(", ");
     clone.querySelector(".exp").textContent = pokemon.exp;
+
+    // Clear existing type icons
+    const typesContainer = clone.querySelector(".types");
+    typesContainer.innerHTML = "";
+
+    // Add type icons
+    pokemon.types.forEach((type) => {
+      const typeSpan = document.createElement("span");
+      typeSpan.className = "material-symbols-outlined";
+      typeSpan.textContent = typeIcons[type.toLowerCase()];
+      typesContainer.appendChild(typeSpan);
+    });
 
     const heartIcon = clone.querySelector(".favoriteHeart");
     if (heartIcon) {
